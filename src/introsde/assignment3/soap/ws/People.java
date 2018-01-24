@@ -30,15 +30,15 @@ public interface People {
     @WebResult(name="createdPerson") 
     public Person addPerson(@WebParam(name="person") Person person);
     
-    @WebMethod(operationName="deletePerson") //Method 5
+    @WebMethod(operationName="deletePersonById") //Method 5
     @WebResult(name="idPerson") 
-    public int deletePerson(@WebParam(name="idPerson") int id);
+    public int deletePerson(@WebParam(name="id") int id);
     
     
     @WebMethod(operationName="readPersonPreferencesByType") //Method 6
     @WebResult(name="personPreferences")
     public List<Activity> getPersonActivityPreferencesByType(
-    						@WebParam(name="idPerson") long idPerson,
+    						@WebParam(name="idPerson") int idPerson,
     						@WebParam(name="type") String activityType); 
     
     @WebMethod(operationName="readPreferences") //Method 7
@@ -48,18 +48,18 @@ public interface People {
     
     @WebMethod(operationName="readPersonPreferencesById") //Method 8
     @WebResult(name="personPreferences")
-    public List<Activity> getPersonActivityPreferencesById(
+    public Activity getPersonActivityPreferencesById(
     						@WebParam(name="idPerson") int idPerson,
     						@WebParam(name="idActivity") int idActivity); 
     
     @WebMethod(operationName="savePersonPreferences") //Method 9
     @WebResult(name="personPreferences")
-    public void savePersonActivity(@WebParam(name="idActivity") int idActivity,
+    public void savePersonActivity(@WebParam(name="idPerson") int idPerson,
     								@WebParam(name="activity") Activity activity);
     
     @WebMethod(operationName="updatePersonPreferences") //Method 10
     @WebResult(name="personPreferences")
-    public List<Activity> updatePersonActivityPreferences(
+    public Activity updatePersonActivityPreferences(
     						@WebParam(name="idPerson") int idPerson,
     						@WebParam(name="activity") Activity activity); 
     

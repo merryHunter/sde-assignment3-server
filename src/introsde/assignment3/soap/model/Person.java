@@ -13,6 +13,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -30,7 +31,10 @@ import introsde.assignment3.soap.util.ActivityUtil;
  */
 @Entity
 @Table(name="\"Person\"")
-@NamedQuery(name="Person.findAll", query="SELECT p FROM Person p")
+@NamedQueries({
+	@NamedQuery(name="Person.findAll", query="SELECT p FROM Person p"),
+	@NamedQuery(name="Person.deleteAll", query="delete from Person")	
+})	
 @XmlRootElement(name="person")
 public class Person implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -51,7 +55,7 @@ public class Person implements Serializable {
 	
 	
 	@OneToMany(mappedBy="person",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-	@XmlElementWrapper(name="preferences")
+//	@XmlElementWrapper(name="preferences")
 	private List<Activity> activitypreference;
 	
 	public Person() {
@@ -102,7 +106,6 @@ public class Person implements Serializable {
 		this.firstname = firstname;
 	}
 
-	@XmlTransient
 	public List<Activity> getActivityPreferences() {
 	    return activitypreference;
 	}
@@ -128,6 +131,12 @@ public class Person implements Serializable {
 	    List<Person> list = em.createNamedQuery("Person.findAll", Person.class).getResultList();
 		ActivityDao.instance.closeConnections(em);
 	    return list;
+	}
+	
+	public static void deleteAll() {
+		EntityManager em = ActivityDao.instance.createEntityManager();
+		em.createNamedQuery("Person.deleteAll", Person.class);
+		ActivityDao.instance.closeConnections(em);
 	}
 	
 	public static Person savePerson(Person p) {

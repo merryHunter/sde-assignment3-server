@@ -8,6 +8,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import introsde.assignment3.soap.model.Activity;
 import introsde.assignment3.soap.model.Person;
+import introsde.assignment3.soap.ws.People;
 
 public class DatabaseInitResource {	
 	// Request#0
@@ -79,7 +80,7 @@ public class DatabaseInitResource {
 	// Request #0
 	@GET
 	@Produces({MediaType.TEXT_XML, MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public static List<Person> getInitialPersonsList() {
+	public static List<Person> getInitialPersonsList() {		
 		List<Person> newPeople = getFiveNewPeople();
 		List<Person> people = new ArrayList<Person>();
 		Person person;

@@ -3,10 +3,7 @@ package introsde.assignment3.soap.endpoint;
 import introsde.assignment3.soap.ws.PeopleImpl;
 
 import java.net.InetAddress;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.UnknownHostException;
-import java.io.IOException;
 
 import javax.xml.ws.Endpoint;
 
