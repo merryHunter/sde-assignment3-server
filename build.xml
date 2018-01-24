@@ -115,17 +115,13 @@
 		</copy>
 	</target>
 
-	<target name="run" depends="compile">
-        <echo message="app start introsde.assignment.soap.endpoint.PeoplePublisher in ${build.dir}" />
-        <java classname="introsde.assignment.soap.endpoint.PeoplePublisher" classpath="${build.dir}" fork="true">
-            <arg value="$JAVA_OPTS  -cp" />
-            <classpath>
-                <path location="build" />
-                <fileset dir="WebContent/WEB-INF/lib">
-                    <include name="**/*.jar" />
-                    <include name="*.jar" />
-                </fileset>
-            </classpath>
-        </java>
-    </target>
+	<!-- make sure you have created first the WebContent folder, including a META-INF folder, WEB-INF/web.xml file and WEB-INF/lib folder -->
+		<target name="create.war" depends="compile">
+			<war destfile="ass3.war" webxml="${web.dir}/WebContent/WEB-INF/web.xml">
+				<fileset dir="${web.dir}/WebContent">
+					<include name="**/*.*"/>
+				</fileset>
+				<classes dir="${build.dir}"/>
+			</war>
+	</target>
 </project>
